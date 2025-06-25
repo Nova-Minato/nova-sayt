@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Men haqimda Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #f0f0f5;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container {
+    background: rgba(30, 30, 60, 0.92);
+    border-radius: 15px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 40px 30px;
+    transition: box-shadow 0.3s ease;
+  }
+  .container:hover {
+    box-shadow: 0 15px 45px rgba(0,0,0,0.75);
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    animation: fadeSlideDown 0.7s ease forwards;
+  }
+
+  h2 {
+    font-weight: 300;
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #c4b4e0;
+    margin-bottom: 40px;
+    animation: fadeSlideDown 0.7s ease forwards;
+    animation-delay: 0.15s;
+  }
+
+  p.bio {
+    font-weight: 300;
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-bottom: 40px;
+    color: #d6d6e6;
+    animation: fadeSlideUp 0.7s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  .interests {
+    margin-bottom: 40px;
+  }
+
+  .interests h3 {
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #a79cc9;
+    animation: fadeSlideLeft 0.6s ease forwards;
+  }
+
+  .interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .interest-item {
+    background: #8a80b9;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: default;
+    user-select: none;
+    transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease;
+    animation: fadeSlideLeft 0.6s ease forwards;
+    animation-delay: 0.2s;
+  }
+  .interest-item:hover {
+    background: #b89cde;
+    color: #2c2365;
+    transform: scale(1.1) rotate(-2deg);
+  }
+
+  .projects {
+    margin-bottom: 10px;
+  }
+
+  .projects h3 {
+    color: #a79cc9;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    animation: fadeSlideRight 0.6s ease forwards;
+  }
+
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .project-item {
+    background: #6c5db6;
+    margin-bottom: 16px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    color: #f0f0f5;
+    user-select: none;
+  }
+
+  .project-item:hover,
+  .project-item:focus-visible {
+    background: #a085e0;
+    color: #2c2365;
+    outline: none;
+    transform: scale(1.03);
+  }
+
+  .project-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  /* Modal styles */
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .modal.show {
+    display: flex;
+    animation: modalFadeIn 0.4s ease forwards;
+  }
+  .modal.hide {
+    animation: modalFadeOut 0.4s ease forwards;
+  }
+
+  .modal-content {
+    background: #201c3b;
+    padding: 30px;
+    border-radius: 14px;
+    max-width: 600px;
+    width: 100%;
+    color: #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    position: relative;
+    transform: scale(0.75);
+    opacity: 0;
+    animation: modalScaleIn 0.4s ease forwards;
+  }
+  .modal.hide .modal-content {
+    animation: modalScaleOut 0.4s ease forwards;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #b99ce0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.25s ease;
+    user-select: none;
+  }
+
+  .modal-close:hover,
+  .modal-close:focus {
+    color: #e0c9ff;
+    outline: none;
+  }
+
+  .modal-title {
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .modal-description {
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* Animations */
+  @keyframes fadeSlideDown {
+    0% {opacity: 0; transform: translateY(-20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeSlideUp {
+    0% {opacity: 0; transform: translateY(20px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeSlideLeft {
+    0% {opacity: 0; transform: translateX(-20px);}
+    100% {opacity: 1; transform: translateX(0);}
+  }
+  @keyframes fadeSlideRight {
+    0% {opacity: 0; transform: translateX(20px);}
+    100% {opacity: 1; transform: translateX(0);}
+  }
+
+  @keyframes modalFadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  @keyframes modalFadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+
+  @keyframes modalScaleIn {
+    from {transform: scale(0.75); opacity: 0;}
+    to {transform: scale(1); opacity:1;}
+  }
+  @keyframes modalScaleOut {
+    from {transform: scale(1); opacity: 1;}
+    to {transform: scale(0.75); opacity:0;}
+  }
+
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+
+    .container {
+      padding: 30px 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Portfolio Profile">
+    <h1>Shodiyev Jasurbek</h1>
+    <h2>Frontend Developer & Designer</h2>
+
+    <p class="bio">
+      Men veb dasturlashga qiziqaman, zamonaviy va funksional interfeyslar yaratishni yoqtiraman. Har doim yangi texnologiyalar o‘rganishga harakat qilaman va kreativ ishlar yarataman.
+    </p>
+
+    <section class="interests" aria-label="Qiziqishlar">
+      <h3>Qiziqishlar</h3>
+      <div class="interests-list">
+        <span class="interest-item">JavaScript</span>
+        <span class="interest-item">CSS Animatsiyalar</span>
+        <span class="interest-item">Responsive Dizayn</span>
+        <span class="interest-item">UX/UI Dizayn</span>
+        <span class="interest-item">React</span>
+        <span class="interest-item">Web Accessibility</span>
+      </div>
+    </section>
+
+    <section class="projects" aria-label="Loyihalar">
+      <h3>Loyihalar</h3>
+      <ul class="project-list" role="list">
+        <li tabindex="0" class="project-item" data-title="Portfolio Sahifa" data-description="Men yaratgan zamonaviy, toza va responsiv portfolio sahifa. HTML, CSS va JavaScriptdan foydalanilgan."> 
+          <p class="project-title">Portfolio Sahifa</p>
+        </li>
+        <li tabindex="0" class="project-item" data-title="Weather App" data-description="Veb ilova ob-havo ma'lumotlarini olish uchun oddiy va tezkor API ulanishi bilan ishlaydi."> 
+          <p class="project-title">Weather App</p>
+        </li>
+        <li tabindex="0" class="project-item" data-title="To'lov Formasi" data-description="Foydalanuvchilar uchun chiroyli va ishlatishga qulay to‘lov formasi yaratildi, validatsiya qo‘shilgan."> 
+          <p class="project-title">To'lov Formasi</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Yopish">&times;</button>
+      <h3 id="modalTitle" class="modal-title"></h3>
+      <p id="modalDesc" class="modal-description"></p>
+    </div>
+  </div>
+
+<script>
+  (() => {
+    const projects = document.querySelectorAll('.project-item');
+    const modal = document.querySelector('.modal');
+    const modalContent = modal.querySelector('.modal-content');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalClose = document.querySelector('.modal-close');
+
+    let modalOpen = false;
+    let modalHideTimeout = null;
+
+    projects.forEach(project => {
+      project.addEventListener('click', () => {
+        openModal(project);
+      });
+      project.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(project);
+        }
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+
+    // Modal tashqarisiga bosilganda yopish
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Escape bosilganda yopish
+    document.addEventListener('keydown', (e) => {
+      if (modalOpen && e.key === "Escape") {
+        closeModal();
+      }
+    });
+
+    function openModal(project) {
+      clearTimeout(modalHideTimeout); // oldingi timeoutni tozalash
+
+      // Ma'lumotlarni har safar yangilash
+      modalTitle.textContent = project.dataset.title;
+      modalDesc.textContent = project.dataset.description;
+
+      // Modalni ko‘rsatish
+      modal.style.display = 'flex';
+      modal.classList.remove('hide');
+      modal.classList.add('show');
+      modalContent.style.animation = 'modalScaleIn 0.4s ease forwards';
+
+      modalOpen = true;
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      if (!modalOpen) return;
+
+      modal.classList.remove('show');
+      modal.classList.add('hide');
+      modalContent.style.animation = 'modalScaleOut 0.4s ease forwards';
+
+      modalHideTimeout = setTimeout(() => {
+        modal.style.display = 'none';
+        modalOpen = false;
+        document.body.style.overflow = '';
+      }, 400);
+    }
+  })();
+</script>
+
+</body>
+</html>
+
