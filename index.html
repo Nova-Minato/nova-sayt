@@ -3,391 +3,483 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Men haqimda Portfolio</title>
+<title>Avtoelektrik Xizmatlari - Mukammal Ta'mirlash va Diagnostika</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
-
-  * {
+  /* Reset */
+  *, *::before, *::after {
     box-sizing: border-box;
   }
-
   body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #f0f0f5;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .container {
-    background: rgba(30, 30, 60, 0.92);
-    border-radius: 15px;
-    max-width: 700px;
-    width: 100%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    padding: 40px 30px;
-    transition: box-shadow 0.3s ease;
-  }
-  .container:hover {
-    box-shadow: 0 15px 45px rgba(0,0,0,0.75);
-  }
-
-  h1 {
-    font-weight: 600;
-    font-size: 2.8rem;
-    margin-bottom: 10px;
-    animation: fadeSlideDown 0.7s ease forwards;
-  }
-
-  h2 {
-    font-weight: 300;
-    margin-top: 0;
-    font-size: 1.2rem;
-    color: #c4b4e0;
-    margin-bottom: 40px;
-    animation: fadeSlideDown 0.7s ease forwards;
-    animation-delay: 0.15s;
-  }
-
-  p.bio {
-    font-weight: 300;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    color: #222;
+    transition: background 0.4s ease, color 0.4s ease;
     line-height: 1.6;
-    font-size: 1rem;
-    margin-bottom: 40px;
-    color: #d6d6e6;
-    animation: fadeSlideUp 0.7s ease forwards;
-    animation-delay: 0.3s;
+  }
+  body.dark-mode {
+    background: #121419;
+    color: #ddd;
   }
 
-  .interests {
-    margin-bottom: 40px;
+  /* Scrollbar for dark mode */
+  body.dark-mode::-webkit-scrollbar {
+    width: 12px;
   }
-
-  .interests h3 {
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
+  body.dark-mode::-webkit-scrollbar-track {
+    background: #1e1e1e;
+  }
+  body.dark-mode::-webkit-scrollbar-thumb {
+    background-color: #4a90e2;
+    border-radius: 10px;
+    border: 3px solid #1e1e1e;
+  }
+ 
+  header {
+    background: linear-gradient(90deg,#005f99 0%,#0088cc 100%);
+    color: #fff;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  header h1 {
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 1.4px;
+    margin: 0;
+    user-select: none;
+  }
+  #theme-toggle {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 28px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
     font-size: 1.1rem;
-    color: #a79cc9;
-    animation: fadeSlideLeft 0.6s ease forwards;
+    transition: background-color 0.3s, color 0.3s;
+    user-select: none;
+  }
+  #theme-toggle:hover {
+    background-color: white;
+    color: #0088cc;
   }
 
-  .interests-list {
+  main {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2.5rem;
+  }
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #007acc 0%, #00c6ff 100%);
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 5px 18px rgba(0,140,204,0.6);
+    user-select: none;
+    animation: fadeInDown 1s ease forwards;
+  }
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .hero h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  .hero p {
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 600;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.3);
+  }
+
+  body.dark-mode .hero {
+    background: linear-gradient(135deg, #004669 0%, #0072af 100%);
+    box-shadow: 0 5px 18px rgba(0,140,204,0.9);
+  }
+  body.dark-mode .hero p {
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+  }
+
+  section.servises {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 3rem;
   }
-
-  .interest-item {
-    background: #8a80b9;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+  .service-card {
+    flex: 1 1 280px;
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 5px 25px rgba(0, 140, 204, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
     user-select: none;
-    transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease;
-    animation: fadeSlideLeft 0.6s ease forwards;
-    animation-delay: 0.2s;
   }
-  .interest-item:hover {
-    background: #b89cde;
-    color: #2c2365;
-    transform: scale(1.1) rotate(-2deg);
+  .service-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 10px 40px rgba(0, 140, 204, 0.35);
   }
-
-  .projects {
-    margin-bottom: 10px;
+  body.dark-mode .service-card {
+    background: #1e1e1e;
+    box-shadow: 0 5px 25px rgba(74,144,226,0.3);
+    color: #ddd;
   }
-
-  .projects h3 {
-    color: #a79cc9;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    animation: fadeSlideRight 0.6s ease forwards;
+  body.dark-mode .service-card:hover {
+    box-shadow: 0 12px 40px rgba(74,144,226,0.7);
   }
 
-  .project-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .project-item {
-    background: #6c5db6;
-    margin-bottom: 16px;
-    padding: 15px 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    color: #f0f0f5;
-    user-select: none;
-  }
-
-  .project-item:hover,
-  .project-item:focus-visible {
-    background: #a085e0;
-    color: #2c2365;
-    outline: none;
-    transform: scale(1.03);
-  }
-
-  .project-title {
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin: 0;
-  }
-
-  /* Modal styles */
-  .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1000; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.75);
-    backdrop-filter: blur(8px);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .modal.show {
-    display: flex;
-    animation: modalFadeIn 0.4s ease forwards;
-  }
-  .modal.hide {
-    animation: modalFadeOut 0.4s ease forwards;
-  }
-
-  .modal-content {
-    background: #201c3b;
-    padding: 30px;
-    border-radius: 14px;
-    max-width: 600px;
-    width: 100%;
-    color: #eee;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    position: relative;
-    transform: scale(0.75);
-    opacity: 0;
-    animation: modalScaleIn 0.4s ease forwards;
-  }
-  .modal.hide .modal-content {
-    animation: modalScaleOut 0.4s ease forwards;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 28px;
-    font-weight: 600;
-    color: #b99ce0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.25s ease;
-    user-select: none;
-  }
-
-  .modal-close:hover,
-  .modal-close:focus {
-    color: #e0c9ff;
-    outline: none;
-  }
-
-  .modal-title {
+  .service-card h3 {
     margin-top: 0;
+    font-size: 1.6rem;
+    color: #007acc;
+  }
+  body.dark-mode .service-card h3 {
+    color: #66aaff;
+  }
+  .service-desc {
+    font-size: 1rem;
+    margin-top: 0.6rem;
+    color: #444;
+    font-weight: 500;
+  }
+  body.dark-mode .service-desc {
+    color: #bbb;
+  }
+
+  /* Accordion container */
+  .accordion-container {
+    max-width: 850px;
+    margin: 0 auto 4rem auto;
+  }
+
+  .accordion-item {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 8px 22px rgba(0, 112, 204, 0.12);
+    overflow: hidden;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+  }
+  .accordion-item.open, .accordion-item:hover {
+    box-shadow: 0 12px 35px rgba(0, 112, 204, 0.22);
+  }
+  body.dark-mode .accordion-item {
+    background: #22272e;
+    box-shadow: 0 10px 28px rgba(74,144,226,0.3);
+  }
+  body.dark-mode .accordion-item.open, body.dark-mode .accordion-item:hover {
+    box-shadow: 0 14px 38px rgba(74,144,226,0.7);
+  }
+
+  .accordion-header {
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
     font-weight: 700;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    font-size: 1.25rem;
+    padding: 1.4rem 2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #007acc;
+    outline-offset: 5px;
+    transition: color 0.3s ease;
+  }
+  .accordion-header:hover,
+  .accordion-header:focus {
+    color: #004a82;
+  }
+  body.dark-mode .accordion-header {
+    color: #66aaff;
+  }
+  body.dark-mode .accordion-header:hover,
+  body.dark-mode .accordion-header:focus {
+    color: #3385ff;
   }
 
-  .modal-description {
-    font-weight: 300;
-    line-height: 1.5;
+  .accordion-icon {
+    font-size: 1.7rem;
+    transition: transform 0.3s ease;
+  }
+  .accordion-icon.open {
+    transform: rotate(90deg);
   }
 
-  /* Animations */
-  @keyframes fadeSlideDown {
-    0% {opacity: 0; transform: translateY(-20px);}
-    100% {opacity: 1; transform: translateY(0);}
+  .accordion-content {
+    padding: 0 2rem 1.5rem 2rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.3s ease;
+    font-weight: 500;
+    color: #444;
+    user-select: text;
   }
-  @keyframes fadeSlideUp {
-    0% {opacity: 0; transform: translateY(20px);}
-    100% {opacity: 1; transform: translateY(0);}
+  .accordion-content.open {
+    opacity: 1;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
   }
-  @keyframes fadeSlideLeft {
-    0% {opacity: 0; transform: translateX(-20px);}
-    100% {opacity: 1; transform: translateX(0);}
-  }
-  @keyframes fadeSlideRight {
-    0% {opacity: 0; transform: translateX(20px);}
-    100% {opacity: 1; transform: translateX(0);}
-  }
-
-  @keyframes modalFadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-  @keyframes modalFadeOut {
-    from {opacity: 1;}
-    to {opacity: 0;}
+  body.dark-mode .accordion-content {
+    color: #ccc;
   }
 
-  @keyframes modalScaleIn {
-    from {transform: scale(0.75); opacity: 0;}
-    to {transform: scale(1); opacity:1;}
+  footer {
+    background: linear-gradient(90deg,#005f99 0%,#0088cc 100%);
+    text-align: center;
+    padding: 2rem 1rem;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    user-select: none;
   }
-  @keyframes modalScaleOut {
-    from {transform: scale(1); opacity: 1;}
-    to {transform: scale(0.75); opacity:0;}
+  a.social-link {
+    margin: 0 12px;
+    font-size: 1.8rem;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    user-select: none;
+  }
+  a.social-link:hover {
+    color: #d1eaff;
   }
 
-  @media (max-width: 600px) {
-    body {
-      padding: 10px;
+  /* Responsive */
+  @media (max-width: 768px) {
+    main {
+      padding: 0 1.5rem;
     }
-
-    .container {
-      padding: 30px 20px;
+    .hero h2 {
+      font-size: 2.2rem;
     }
-
-    h1 {
-      font-size: 2rem;
+    section.servises {
+      gap: 1.4rem;
+    }
+    .service-card {
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .hero h2 {
+      font-size: 1.8rem;
+    }
+    header h1 {
+      font-size: 1.3rem;
+    }
+    #theme-toggle {
+      font-size: 1rem;
+      padding: 0.4rem 1rem;
     }
   }
 </style>
 </head>
 <body>
-  <main class="container" role="main" aria-label="Portfolio Profile">
-    <h1>Shodiyev Jasurbek</h1>
-    <h2>Frontend Developer & Designer</h2>
+<header>
+  <h1>Avtoelektrik Xizmatlari</h1>
+  <button id="theme-toggle" aria-label="Qorong'u / Yorug' rejimini almashtirish">🌙</button>
+</header>
 
-    <p class="bio">
-      Men veb dasturlashga qiziqaman, zamonaviy va funksional interfeyslar yaratishni yoqtiraman. Har doim yangi texnologiyalar o‘rganishga harakat qilaman va kreativ ishlar yarataman.
-    </p>
+<main>
+  <section class="hero" aria-label="Sayt haqida qisqacha ma'lumot">
+    <h2>Avtomobilingiz elektr tizimlari uchun mukammal xizmatlar</h2>
+    <p>Biz professional avtoelektriklar sifatida barcha turdagi elektr muammolarini hal qilamiz – diagnostikadan tortib, to'liq ta'mirlashgacha.</p>
+  </section>
 
-    <section class="interests" aria-label="Qiziqishlar">
-      <h3>Qiziqishlar</h3>
-      <div class="interests-list">
-        <span class="interest-item">JavaScript</span>
-        <span class="interest-item">CSS Animatsiyalar</span>
-        <span class="interest-item">Responsive Dizayn</span>
-        <span class="interest-item">UX/UI Dizayn</span>
-        <span class="interest-item">React</span>
-        <span class="interest-item">Web Accessibility</span>
-      </div>
-    </section>
-
-    <section class="projects" aria-label="Loyihalar">
-      <h3>Loyihalar</h3>
-      <ul class="project-list" role="list">
-        <li tabindex="0" class="project-item" data-title="Portfolio Sahifa" data-description="Men yaratgan zamonaviy, toza va responsiv portfolio sahifa. HTML, CSS va JavaScriptdan foydalanilgan."> 
-          <p class="project-title">Portfolio Sahifa</p>
-        </li>
-        <li tabindex="0" class="project-item" data-title="Weather App" data-description="Veb ilova ob-havo ma'lumotlarini olish uchun oddiy va tezkor API ulanishi bilan ishlaydi."> 
-          <p class="project-title">Weather App</p>
-        </li>
-        <li tabindex="0" class="project-item" data-title="To'lov Formasi" data-description="Foydalanuvchilar uchun chiroyli va ishlatishga qulay to‘lov formasi yaratildi, validatsiya qo‘shilgan."> 
-          <p class="project-title">To'lov Formasi</p>
-        </li>
-      </ul>
-    </section>
-  </main>
-
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Yopish">&times;</button>
-      <h3 id="modalTitle" class="modal-title"></h3>
-      <p id="modalDesc" class="modal-description"></p>
+  <section class="servises" aria-label="Avtoelektrik xizmatlari haqida ko'proq ma'lumot">
+    <div class="service-card" tabindex="0">
+      <h3>Elektr Tizimini Diagnostika Qilish</h3>
+      <p class="service-desc">Avtomobil elektr tizimining barcha komponentlarini maxsus asbob-uskunalar yordamida sinovdan o'tkazamiz, nuqsonlarni aniqlaymiz va samarali hal qilamiz.</p>
     </div>
-  </div>
+    <div class="service-card" tabindex="0">
+      <h3>Batareyalar va Zaryad Tizimi</h3>
+      <p class="service-desc">Batareya zaryadini baholaymiz, zaryadlash tizimini sozlaymiz va kerak bo'lsa yangilarini o'rnatamiz.</p>
+    </div>
+    <div class="service-card" tabindex="0">
+      <h3>Starter va Alternator Ta'miri</h3>
+      <p class="service-desc">Starter va alternatorning to'g'ri ishlashini ta'minlaymiz, buzilgan qismlarni almashtiramiz.</p>
+    </div>
+    <div class="service-card" tabindex="0">
+      <h3>Yoritish Vositalarini Sozlash</h3>
+      <p class="service-desc">Faralar, indikatorlar va boshqa yoritish tizimlarini sozlaymiz va ulardagi muammolarni bartaraf qilamiz.</p>
+    </div>
+    <div class="service-card" tabindex="0">
+      <h3>Kabel va Ulanishlarni Ta'mirlash</h3>
+      <p class="service-desc">Avtomobil elektr kabelarini tekshirib, shikastlangan ulanishlarni yaxshilaymiz va almashtiramiz.</p>
+    </div>
+  </section>
+
+  <section class="accordion-container" aria-label="Batafsil avtoelektrik xizmatlari">
+    <article class="accordion-item" id="acc1">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel1" id="header1">
+        Diagnostika va Nosozliklarni Aniqlash
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel1" class="accordion-content" role="region" aria-labelledby="header1">
+        <p>
+          Avtomobil elektr tizimini to‘liq diagnostika qilish maxsus tajriba va aniq uskuna talab qiladi.
+          Bizning mutaxassislarimiz avtomobilingiz batareyasi, starteri, alternatori va boshqa barcha elektr qismlarini
+          zamonaviy diagnostika asboblari yordamida tekshirib, har qanday nosozliklarni aniqlay oladi.
+          Bu, o‘z navbatida, ta’mirlashni tez va sifatli bajarishga imkon beradi.
+        </p>
+      </div>
+    </article>
+
+    <article class="accordion-item" id="acc2">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel2" id="header2">
+        Batareyalar va Zaryad Tizimlari
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel2" class="accordion-content" role="region" aria-labelledby="header2">
+        <p>
+          Biz avtomobil batareyalarining holatini tekshirib, zaryadlash tizimini boshqaramiz.
+          Kerak bo‘lsa, yangi zamonaviy batareyalarni o‘rnatamiz va zaryadlash tizimini optimallashtiramiz,
+          bu esa avtomobilning elektr tizimining ishonchliligini ta'minlaydi.
+        </p>
+      </div>
+    </article>
+
+    <article class="accordion-item" id="acc3">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel3" id="header3">
+        Starter va Alternator Ta'miri
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel3" class="accordion-content" role="region" aria-labelledby="header3">
+        <p>
+          Avtomobil starteri va alternatorining ishonchli ishlashini ta'minlash uchun ularni tekshirish va ta'mirlash
+          mutaxassislarning ustunligini talab qiladi. Biz buzilgan qismlarni almashtirib, qurilmalarni qayta sozlab,
+          optimal ishlashini ta'minlaymiz.
+        </p>
+      </div>
+    </article>
+
+    <article class="accordion-item" id="acc4">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel4" id="header4">
+        Yoritish Vositalari va Izolyatsiya
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel4" class="accordion-content" role="region" aria-labelledby="header4">
+        <p>
+          Avtomobilning faralari, to‘xtash signallari va ichki yoritish tizimlari samarali ishlashini ta'minlash,
+          shuningdek, izolyatsiya muammolarini hal qilish bo‘yicha xizmatlar. Yoritish tizimidagi muammolar
+          xavfsiz haydash uchun muhim ahamiyatga ega.
+        </p>
+      </div>
+    </article>
+
+    <article class="accordion-item" id="acc5">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel5" id="header5">
+        Kabel va Ulanishlarni Ta'mirlash
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel5" class="accordion-content" role="region" aria-labelledby="header5">
+        <p>
+          Elektr kabel va ulanishlarining holatini tekshirib, shikastlangan joylarni ta'mirlash va almashtirish amalga oshiriladi.
+          Bu jarayon avtomobilning elektr tizimining ish faoliyatini barqarorlashtiradi.
+        </p>
+      </div>
+    </article>
+
+    <article class="accordion-item" id="acc6">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel6" id="header6">
+        Elektr Jihozlarini O'rnatish va Modernizatsiya
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel6" class="accordion-content" role="region" aria-labelledby="header6">
+        <p>
+          Zamonaviy avtomobillarga qo‘shimcha elektr jihozlari o‘rnatish va mavjud tizimlarni yangilash xizmatlari.
+          Bunda signalizatsiya, videoqo‘riqlash va boshqa xavfsizlik tizimlari o‘rnatiladi.
+        </p>
+      </div>
+    </article>
+
+    <article class="accordion-item" id="acc7">
+      <button class="accordion-header" aria-expanded="false" aria-controls="panel7" id="header7">
+        Avtomobil Kompyuterlarini Diagnostika va Ta'mirlash
+        <span class="accordion-icon">▶</span>
+      </button>
+      <div id="panel7" class="accordion-content" role="region" aria-labelledby="header7">
+        <p>
+          Avtomobilning boshqaruv kompyuterlari (ECU) ish faoliyatini tekshirish, diagnostika qilish va kerak bo‘lsa dasturiy
+          ta'mirlash va yangilash xizmatlari.
+        </p>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <p>© 2024 Avtoelektrik Xizmatlari. Barcha huquqlar himoyalangan.</p>
+  <a href="https://facebook.com" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">📘</a>
+  <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">📸</a>
+  <a href="https://telegram.org" target="_blank" rel="noopener" class="social-link" aria-label="Telegram">✈️</a>
+</footer>
 
 <script>
-  (() => {
-    const projects = document.querySelectorAll('.project-item');
-    const modal = document.querySelector('.modal');
-    const modalContent = modal.querySelector('.modal-content');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalClose = document.querySelector('.modal-close');
+  // Accordion uchun
+  const items = document.querySelectorAll('.accordion-item');
 
-    let modalOpen = false;
-    let modalHideTimeout = null;
+  items.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    const icon = item.querySelector('.accordion-icon');
+    const content = item.querySelector('.accordion-content');
 
-    projects.forEach(project => {
-      project.addEventListener('click', () => {
-        openModal(project);
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      // Boshqalarni yopish
+      items.forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+        i.querySelector('.accordion-icon').classList.remove('open');
+        i.querySelector('.accordion-content').classList.remove('open');
+        i.querySelector('.accordion-content').style.maxHeight = null;
       });
-      project.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal(project);
-        }
-      });
-    });
 
-    modalClose.addEventListener('click', closeModal);
-
-    // Modal tashqarisiga bosilganda yopish
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) {
-        closeModal();
+      // Agar hozir yopiq bo'lsa, ochamiz
+      if (!isOpen) {
+        item.classList.add('open');
+        header.setAttribute('aria-expanded', 'true');
+        icon.classList.add('open');
+        content.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + "px";
       }
     });
+  });
 
-    // Escape bosilganda yopish
-    document.addEventListener('keydown', (e) => {
-      if (modalOpen && e.key === "Escape") {
-        closeModal();
-      }
-    });
+  // Dark mode toggle uchun
+  const themeToggle = document.getElementById('theme-toggle');
 
-    function openModal(project) {
-      clearTimeout(modalHideTimeout); // oldingi timeoutni tozalash
-
-      // Ma'lumotlarni har safar yangilash
-      modalTitle.textContent = project.dataset.title;
-      modalDesc.textContent = project.dataset.description;
-
-      // Modalni ko‘rsatish
-      modal.style.display = 'flex';
-      modal.classList.remove('hide');
-      modal.classList.add('show');
-      modalContent.style.animation = 'modalScaleIn 0.4s ease forwards';
-
-      modalOpen = true;
-      document.body.style.overflow = 'hidden';
-      modalClose.focus();
-    }
-
-    function closeModal() {
-      if (!modalOpen) return;
-
-      modal.classList.remove('show');
-      modal.classList.add('hide');
-      modalContent.style.animation = 'modalScaleOut 0.4s ease forwards';
-
-      modalHideTimeout = setTimeout(() => {
-        modal.style.display = 'none';
-        modalOpen = false;
-        document.body.style.overflow = '';
-      }, 400);
-    }
-  })();
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  });
 </script>
 
 </body>
-</html>
-
+</html>                                   
